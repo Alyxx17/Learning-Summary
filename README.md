@@ -10,5 +10,5 @@ main.py为主要程序，其余为读取飞行日志的辅助函数（必要）
 已经加入注释，各代码的相关性很强，部分代码的注释较少，可以参考别的代码，有些代码注释写的比较详细。
 
 ### 强化学习/强化学习进阶/DQN:  
-学习路径：DQN，Double DQN,Dueling DQN,nstep DQN，Noisy DQN,PER DQN。每一种改进都在原有改进上加入，PER DQN为集大成者（5种改进为一体），C51改进暂时没有。  
+学习路径：DQN→Double DQN(DDQN)→Dueling DQN(DuelingDDQN)→nstep DQN(Nstep)→Noisynet DQN→PER DQN。每一种改进都在原有改进上加入，PER DQN为集大成者（5种改进为一体），C51改进暂时没有，每一个代码都分为训练和测试。  
 代码注释很详细，有学习笔记关于各部分的原理与解惑，seed为设定随机种子。
