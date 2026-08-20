@@ -12,3 +12,7 @@ main.py为主要程序，其余为读取飞行日志的辅助函数（必要）
 ### 强化学习/强化学习进阶/DQN:  
 学习路径：DQN→Double DQN(DDQN)→Dueling DQN(DuelingDDQN)→nstep DQN(Nstep)→Noisynet DQN→PER DQN。每一种改进都在原有改进上加入，PER DQN为集大成者（5种改进为一体），C51改进暂时没有，每一个代码都分为训练和测试。  
 代码注释很详细，有学习笔记关于各部分的原理与解惑，seed为设定随机种子。
+
+### 强化学习/强化学习进阶/策略梯度:  
+学习路径：REINFORCE→REINFORCE-baseline(基线 + 熵正则 + 回报标准化)→A2C(GAE 优势 + 并行环境 + 共享网络 + 熵正则 + 优势标准化)→PPO(相对A2C新增了clip与重要性minibatch重训练)。每一个代码都分为训练和测试。
+代码注释很详细，有学习笔记关于各部分的原理与解惑，seed为设定随机种子。
