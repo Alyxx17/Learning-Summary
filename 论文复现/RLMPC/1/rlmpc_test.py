@@ -16,6 +16,7 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+from sympy import Idx
 import unicycle_env as env
 import mpc_solver as mpc
 
@@ -23,7 +24,7 @@ import mpc_solver as mpc
 N_RL       = 5                   # RLMPC 预测时域
 N_TR       = 30                 # 传统 MPC 预测时域（论文 N≥30）
 SIM_STEPS  = 60                  # 闭环仿真步数
-MODE     = 'branch1'           
+MODE     = 'branch2'           
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # =================== 加载 Epi.1 产物 ===================
@@ -127,22 +128,58 @@ print(f"RLMPC Epi.2 ACC = {acc2[-1]:9.4f}  （论文约 558.7）")
 # =================== 可视化：轨迹 + ACC ===================
 fig, axes = plt.subplots(1, 2, figsize=(13, 5))
 
-axes[0].plot(x3[:, 0], x3[:, 1], "y-o", markersize=3, label="Traditional MPC")
-axes[0].plot(x1[:, 0], x1[:, 1], "b-o", markersize=3, label="RLMPC Epi.1")
-axes[0].plot(x2[:, 0], x2[:, 1], "r-o", markersize=3, label="RLMPC Epi.2")
-axes[0].axvline(env.X_MIN, color="k", linestyle="--", label="Constraint x=0")
-axes[0].axvline(env.X_MAX, color="k", linestyle="--", label="Constraint x=2")
+axes[0].plot(x3[:, 0], x3[:, 1], "y", markersize=3, label="Traditional MPC")
+axes[0].plot(x1[:, 0], x1[:, 1], "b", markersize=3, label="RLMPC Epi.1")
+axes[0].plot(x2[:, 0], x2[:, 1], "r", markersize=3, label="RLMPC Epi.2")
+axes[0].axvline(env.X_MIN, color="r", linestyle="--", label="Constraint x=0")
+axes[0].axvline(env.X_MAX, color="r", linestyle="--", label="Constraint x=2")
 axes[0].scatter([env.X0[0]], [env.X0[1]], color="g", marker="o", s=60, zorder=5, label="Initial state")
 axes[0].scatter([0], [0], color="k", marker="*", s=150, zorder=5, label="Target origin")
 axes[0].set_xlabel("x (m)"); axes[0].set_ylabel("y (m)")
 axes[0].set_title("Trajectories"); axes[0].legend(); axes[0].grid(True)
 
-axes[1].plot(np.arange(len(acc3)) + 1, acc3, "y-o", markersize=3, label="Traditional MPC")
-axes[1].plot(np.arange(len(acc1)) + 1, acc1, "b-o", markersize=3, label="RLMPC Epi.1")
-axes[1].plot(np.arange(len(acc2)) + 1, acc2, "r-o", markersize=3, label="RLMPC Epi.2")
+axes[1].plot(np.arange(len(acc3)) + 1, acc3, "y", markersize=3, label="Traditional MPC")
+axes[1].plot(np.arange(len(acc1)) + 1, acc1, "b", markersize=3, label="RLMPC Epi.1")
+axes[1].plot(np.arange(len(acc2)) + 1, acc2, "r", markersize=3, label="RLMPC Epi.2")
 axes[1].set_xlabel("Time step k"); axes[1].set_ylabel("ACC")
 axes[1].set_title("Accumulated Costs"); axes[1].legend(); axes[1].grid(True)
 
+accs = [acc1, acc2, acc3]
+if MODE == 'branch1':
+    for i in accs:
+        xy = (60, i[-1])
+        if i is acc3:
+            y_offset = -10
+        else:  
+            y_offset = 10
+        # 文本位置
+        xytext = (65, i[-1] + y_offset)
+        arrowprops = dict(arrowstyle='->', color='k', lw=1.5)
+        axes[1].annotate(
+            f'{i[-1]:.2f}',           
+            xy=xy,
+            xytext=xytext,
+            arrowprops=arrowprops,
+            color='k',
+            fontsize=10,
+        )
+elif MODE == 'branch2':
+    for i in accs:
+        if i is acc3:
+            k = 39
+        else:
+            k = 41
+        xy = (k, i[k])
+        xytext = (k + 5, i[k] + 10)
+        arrowprops = dict(arrowstyle='->', color='k', lw=1.5)
+        axes[1].annotate(
+            f'{i[k]:.2f}',
+            xy=xy,
+            xytext=xytext,
+            arrowprops=arrowprops,
+            color='k',
+            fontsize=10,
+        )
 plt.tight_layout()
 plt.show()
 
@@ -154,8 +191,8 @@ for ax, j, name, lim in zip(axes, [0, 1],
     ax.step(np.arange(len(u3)) + 1, u3[:, j], "y-", where="post", label="Traditional MPC")
     ax.step(np.arange(len(u1)) + 1, u1[:, j], "b-", where="post", label="RLMPC Epi.1")
     ax.step(np.arange(len(u2)) + 1, u2[:, j], "r-", where="post", label="RLMPC Epi.2")
-    ax.axhline(lim, color="k", linestyle="--", label="Constraint")
-    ax.axhline(-lim, color="k", linestyle="--")
+    ax.axhline(lim, color="r", linestyle="--", label="Constraint")
+    ax.axhline(-lim, color="r", linestyle="--")
     ax.set_xlabel("Time step k"); ax.set_ylabel(name)
     ax.set_title(f"Control Input: {name}"); ax.legend(); ax.grid(True)
 
