@@ -12,6 +12,7 @@
 > rlmpc_train.py RLMPC训练  
 > rlmpc_test.py 对比  
 > 使用时先运行rlmpc_train.py再运行 rlmpc_test.py  
+> 只复现了非线性，对于线性，按照论文的参数可以轻松复现  
 > 代码内注释很详细，在此不赘述  
 > 目录内有论文的方法原理，以及终端集，终端约束的基础原理
 
