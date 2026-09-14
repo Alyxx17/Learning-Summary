@@ -28,6 +28,9 @@
 - 学习路径：REINFORCE——REINFORCE_baseline(基线 + 熵正则 + 回报标准化)——A2C(GAE 优势 + 并行环境 + 共享网络 + 熵正则 + 优势标准化)——PPO(相对A2C新增了clip与重要性minibatch重训练)。
 > 对于DQN与策略梯度，每个算法都分为训练和测试，目录内已有对应训练好的模型，若需要重新训练，先运行xxxx_train.py，再运行对应的xxxx_test.py  
 > 代码注释很详细，有学习笔记关于各部分的原理与解惑，seed为设定随机种子
+-----
+[SAC](https://github.com/Alyxx17/Learning-Summary/tree/main/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6/SAC)
+> 自动调节温度系数
 
 
 # 寻路算法 
