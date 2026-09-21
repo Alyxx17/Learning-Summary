@@ -20,14 +20,14 @@
 
 [SACMPC](https://github.com/Alyxx17/Learning-Summary/tree/main/SACMPC)  
 
-├── unicycle_env.py          # 底层物理环境与任务定义
-├── tracking_mpc.py          # CasADi 实现的参数化跟踪 MPC 求解器
-├── mpc_env.py               # Gym 风格环境封装（MPC 与真实系统的交互接口）
-├── sac_agent.py             # SAC 智能体（Actor-Critic 网络、经验池、自动温度）
-├── train_sac_qr.py          # SAC 训练脚本（在线学习 Q/R 权重）
-├── evaluate_compare.py      # 评估与对比脚本（SAC vs 固定权重基线）
-├── set_seed.py              # 随机种子固定工具
-├── sac_diag_model_error.pth # [生成] 训练得到的最终模型权重(MISMATCH_PRESET = "mild"下训练出来的模型，下同)
+├── unicycle_env.py          # 底层物理环境与任务定义  
+├── tracking_mpc.py          # CasADi 实现的参数化跟踪 MPC 求解器  
+├── mpc_env.py               # Gym 风格环境封装（MPC 与真实系统的交互接口）  
+├── sac_agent.py             # SAC 智能体（Actor-Critic 网络、经验池、自动温度）  
+├── train_sac_qr.py          # SAC 训练脚本（在线学习 Q/R 权重）  
+├── evaluate_compare.py      # 评估与对比脚本（SAC vs 固定权重基线）  
+├── set_seed.py              # 随机种子固定工具  
+├── sac_diag_model_error.pth # [生成] 训练得到的最终模型权重(MISMATCH_PRESET = "mild"下训练出来的模型，下同)  
 └──  sac_diag_model_best_error.pth # [生成] 训练中评估最优的模型权重  
 
 > 仅作为SAC与MPC结合的学习代码，学习强化学习算法如何与MPC结合。
