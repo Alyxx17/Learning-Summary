@@ -15,7 +15,7 @@
 > 只复现了非线性，对于线性，按照论文的参数可以轻松复现  
 > 代码内注释很详细，在此不赘述  
 > 目录内有论文的方法原理，以及终端集，终端约束的基础原理
-# MPC相关自学内容
+# MPC相关自学内容  
 [SACMPC](https://github.com/Alyxx17/Learning-Summary/tree/main/SACMPC)
 ├── unicycle_env.py          # 底层物理环境与任务定义
 ├── tracking_mpc.py          # CasADi 实现的参数化跟踪 MPC 求解器
@@ -28,6 +28,7 @@
 └──  sac_diag_model_best_error.pth # [生成] 训练中评估最优的模型权重  
 
 > 仅作为SAC与MPC结合的学习代码，学习强化学习算法如何与MPC结合。
+> 运行训练请执行 train_sac_qr.py；运行评估对比请执行 python evaluate_compare.py。
 
 - unicycle_env.py：定义了独轮车（Unicycle）的运动学模型、参考轨迹生成器（直线/圆弧/正弦）、跟踪误差计算、单步评价代价函数。特别地，这里包含了模型失配（Mismatch）的开关与参数（执行器增益、侧滑角、外扰），以及动作空间到物理权重的映射（decode_action）。  
 - tracking_mpc.py：基于 CasADi + IPOPT 的跟踪 MPC 求解器。它接收当前状态、参考窗口以及 SAC 输出的 5 个 Q/R 对角权重，在预测时域内求解最优控制序列，并返回首步控制量。MPC 内部模型使用理想模型，与真实系统形成失配。
