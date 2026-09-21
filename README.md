@@ -15,8 +15,11 @@
 > 只复现了非线性，对于线性，按照论文的参数可以轻松复现  
 > 代码内注释很详细，在此不赘述  
 > 目录内有论文的方法原理，以及终端集，终端约束的基础原理
+
 # MPC相关自学内容  
-[SACMPC](https://github.com/Alyxx17/Learning-Summary/tree/main/SACMPC)
+
+[SACMPC](https://github.com/Alyxx17/Learning-Summary/tree/main/SACMPC)  
+
 ├── unicycle_env.py          # 底层物理环境与任务定义
 ├── tracking_mpc.py          # CasADi 实现的参数化跟踪 MPC 求解器
 ├── mpc_env.py               # Gym 风格环境封装（MPC 与真实系统的交互接口）
