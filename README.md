@@ -62,7 +62,8 @@
 └──  sac_diag_model_best_error.pth # [生成] 训练中评估最优的模型权重  
 
 > 仅作为SAC与MPC结合的学习代码，学习强化学习算法如何与MPC结合。
-> 运行训练请执行 train_sac_qr.py；运行评估对比请执行 python evaluate_compare.py。
+> 运行训练请执行 train_sac_qr.py；
+> 运行评估对比请执行 python evaluate_compare.py。
 
 - unicycle_env.py：定义了独轮车（Unicycle）的运动学模型、参考轨迹生成器（直线/圆弧/正弦）、跟踪误差计算、单步评价代价函数。特别地，这里包含了模型失配（Mismatch）的开关与参数（执行器增益、侧滑角、外扰），以及动作空间到物理权重的映射（decode_action）。  
 - tracking_mpc.py：基于 CasADi + IPOPT 的跟踪 MPC 求解器。它接收当前状态、参考窗口以及 SAC 输出的 5 个 Q/R 对角权重，在预测时域内求解最优控制序列，并返回首步控制量。MPC 内部模型使用理想模型，与真实系统形成失配。
@@ -70,7 +71,7 @@
 - sac_agent.py：实现了 Soft Actor-Critic (SAC) 算法。包含双 Q 网络、目标网络软更新、重参数化 tanh 策略以及自动温度调节。它不直接与环境交互，而是提供策略采样和网络更新的接口。
 - train_sac_qr.py：训练主脚本。初始化 MPCEnv 和 SACAgent，进行在线交互。SAC 每步输出权重，MPC 求解控制，真实系统推进。脚本会记录训练回报、Q/R 权重的动态变化，并定期在固定评估集上验证，保存最优模型。
 - evaluate_compare.py：对比实验脚本。加载训练好的 SAC 模型，在 30 个固定评测场景上运行，并与“固定权重（单位阵）”基线进行对比。输出包括平均等效代价、RMSE、尾段误差、平均权重，并生成对比图表。
-- 
+  
 
 
 # 强化学习基础 
