@@ -15,6 +15,37 @@
 > 只复现了非线性，对于线性，按照论文的参数可以轻松复现  
 > 代码内注释很详细，在此不赘述  
 > 目录内有论文的方法原理，以及终端集，终端约束的基础原理
+-----
+- 《*Value Approximator-Based Learning Model Predictive Control for Iterative Tasks》
+[复现代码](https://github.com/Alyxx17/Learning-Summary/tree/main/VA-LMPC)
+
+├── A. Numerical Example/                                  # 复现 1：IV-A 数值例子（双积分器）  
+├── double_integrator_env.py                           # 底层物理环境与任务定义（动力学 / 代价 Q,R / 状态与输入约束 / 初始可行轨迹 / cost-to-go 标签）  
+├── va_basis.py                                        # 价值近似器：六项基函数的数值版与符号版、最小二乘拟合、凸性检查工具  
+├── va_lmpc_solver.py                                  #  CasADi+IPOPT 求解器（终端代价 = 学到的价值函数）与闭环滚动  
+├── va_lmpc_train.py                                   # Algorithm 1 训练主程序：初始化 W⁰ → 逐轮"求解/执行/更新 W" → 保存训练结果  
+├── va_lmpc_test.py                                    # 结果评估与出图：复算闭环、求解 OLPS 基准、输出 3 张图  
+├── olps.py                                            # 开环最优参考解（N=100 直接法优化，用于验证最优性）  
+├── W_final.npy                                        # 训练产物：最终价值权重 W*  
+├── va_data.npz                                        # 训练产物：迭代代价、耗时、W 历史、初始可行轨迹数据  
+├── fig_value_approximator.png                         # 输出图：价值近似器曲面  
+├── fig_trajectory.png                                 # 输出图：x-y 相平面轨迹对比   
+└── fig_iteration_cost.png                             # 输出图：迭代代价收敛曲线  
+
+├── B. Vehicle Dynamics and Fixed Obstacle Avoidance/      # 复现 2：IV-B 车辆避障（固定椭圆障碍）  
+├── vehicle_env.py                                     # 底层物理环境与任务定义（车辆模型 / 椭圆障碍 / 代价 / 初始可行轨迹与 OLPS 共用的 OCP）  
+├── va_basis.py                                        # 价值近似器（B 版）：六项基函数 + 普通最小二乘 + 带结构约束的最小二乘（W0=0、二次部分半正定、W2≤0）  
+├── vehicle_va_mpc.py                                  # 车辆版求解器与闭环滚动（每轮终止判据 J* ≤ 1e-4）  
+├── vehicle_train.py                                   # 训练主程序（车辆版）  
+├── vehicle_test.py                                    # 结果评估与出图：价值曲面 / 输入对比 / 轨迹
+├── vehicle_W_final.npy                                # 训练产物：最终价值权重 W*  
+├── vehicle_data.npz                                   # 训练产物：迭代代价、耗时、W 历史、初始可行轨迹数据  
+├── fig_vehicle_value.png                              # 输出图：价值近似器曲面 
+├── fig_vehicle_inputs.png                             # 输出图：第 1 轮速度、偏航角输入 vs OLPS  
+└── fig_vehicle_traj.png                               # 输出图：轨迹 + 椭圆障碍  
+
+> 两个仿真均先运行train再运行test即可  
+> 参考代码：https://github.com/Tongji-BitaAI-Lab/VA_LMPC
 
 # MPC相关自学内容  
 
