@@ -16,7 +16,7 @@
 > 代码内注释很详细，在此不赘述  
 > 目录内有论文的方法原理，以及终端集，终端约束的基础原理
 -----
-- 《*Value Approximator-Based Learning Model Predictive Control for Iterative Tasks》
+- 《*Value Approximator-Based Learning Model Predictive Control for Iterative Tasks*》
 [复现代码](https://github.com/Alyxx17/Learning-Summary/tree/main/VA-LMPC)
 
 ├── A. Numerical Example/                                  # 复现 1：IV-A 数值例子（双积分器）  
