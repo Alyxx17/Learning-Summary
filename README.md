@@ -17,7 +17,7 @@
 > 目录内有论文的方法原理，以及终端集，终端约束的基础原理
 -----
 - 《*Value Approximator-Based Learning Model Predictive Control for Iterative Tasks*》
-[复现代码](https://github.com/Alyxx17/Learning-Summary/tree/main/VA-LMPC)
+[复现代码](https://github.com/Alyxx17/Learning-Summary/tree/main/%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B0/VA-LMPC)
 
 ├── A. Numerical Example/                                  # 复现 1：IV-A 数值例子（双积分器）  
 ├── double_integrator_env.py                           # 底层物理环境与任务定义（动力学 / 代价 Q,R / 状态与输入约束 / 初始可行轨迹 / cost-to-go 标签）  
