@@ -1,6 +1,10 @@
 # 声明
-以下内容均有AI辅助，“论文复现”部分，（默认）我会与原文核对，在尽可能与原文的逻辑方法参数一致的情况下复现，但限于水平有限，错误难免，欢迎各位批评指正
-
+内容均有AI辅助  
+“论文复现”部分，（默认）我会与原文核对，在尽可能与原文的逻辑方法参数一致的情况下复现，但限于水平有限，错误难免。欢迎各位批评指正  
+“强化学习”部分，仅仅作为我的学习笔记与记录，仅供参考，难免错误，欢迎批评指导  
+“寻路算法”部分，仅为了开发一个游戏脚本的学习内容  
+“自学部分”，仅自娱自乐  
+ 
 # 论文复现
 - 《*Data Driven System Identification of Quadrotors Subject to Motor Delays*》
 [复现代码](https://github.com/Alyxx17/Learning-Summary/tree/main/%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B0/%E7%B3%BB%E7%BB%9F%E8%BE%A8%E8%AF%86/1)
@@ -117,10 +121,12 @@
 - 学习路径：REINFORCE——REINFORCE_baseline(基线 + 熵正则 + 回报标准化)——A2C(GAE 优势 + 并行环境 + 共享网络 + 熵正则 + 优势标准化)——PPO(相对A2C新增了clip与重要性minibatch重训练)。
 > 对于DQN与策略梯度，每个算法都分为训练和测试，目录内已有对应训练好的模型，若需要重新训练，先运行xxxx_train.py，再运行对应的xxxx_test.py  
 > 代码注释很详细，有学习笔记关于各部分的原理与解惑，seed为设定随机种子
------
+
 [SAC](https://github.com/Alyxx17/Learning-Summary/tree/main/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6/SAC)
 > 自动调节温度系数
-
+-----
+[TD3](https://github.com/Alyxx17/Learning-Summary/tree/main/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6/TD3)
+>DPG——DDPG——TD3  
 
 # 寻路算法 
 BFS，A*，A*(带奖励点和障碍点)  
