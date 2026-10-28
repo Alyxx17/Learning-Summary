@@ -76,7 +76,7 @@
     └── fig10_reward_convergence.png             # 固定/变步长训练奖励收敛  
 > 只复现了scenario 1  
 > 论文本身存在一些问题，参数也没给全  
-> 没有与原文核对，仅与AI促膝长谈后，AI给出的代码
+
 -----
 - 《*MPC-Guided Deep Reinforcement Learning for  Optimal Charging of Lithium-Ion Battery  With Uncertainty*》
 [复现代码](https://github.com/Alyxx17/Learning-Summary/tree/main/%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B0/MPC-Guided_Deep_Reinforcement_Learning_for_Optimal_Charging_of_Lithium-Ion_Battery_With_Uncertainty)
