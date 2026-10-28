@@ -76,7 +76,36 @@
     └── fig10_reward_convergence.png             # 固定/变步长训练奖励收敛  
 > 只复现了scenario 1  
 > 论文本身存在一些问题，参数也没给全  
-> 没有与原文核对，仅与AI促膝长谈后，AI给出的代码 
+> 没有与原文核对，仅与AI促膝长谈后，AI给出的代码
+-----
+- 《*MPC-Guided Deep Reinforcement Learning for  Optimal Charging of Lithium-Ion Battery  With Uncertainty*》
+[复现代码](https://github.com/Alyxx17/Learning-Summary/tree/main/%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B0/MPC-Guided_Deep_Reinforcement_Learning_for_Optimal_Charging_of_Lithium-Ion_Battery_With_Uncertainty)
+
+├── 复现说明.md                        # 复现范围、参数来源与标定依据（Lin 2014 + 反标定）、与原文不一致处、实测结果对照、已修复的实现缺陷  
+├── battery_parameters.py              # 式(1)–(7) 参数：OCV(SOC) 单调三次插值、R0/R1/R2/C1/C2 的 SOC/温度依赖、约束阈值（Imax=46 A、Vmax=3.6 V、Ts,max=32 °C）、未建模 SOC 扰动幅值 0.001  
+├── electro_thermal_model.py           # 式(1)–(9)(13)：五状态 [U1,U2,SOC,Ts,Tc] 电热模型；RC 网络 ZOH 精确离散、热网络矩阵指数离散、解析 Jacobian 与线性化偏移 δ  
+├── unscented_kalman_filter.py         # Algorithm 1：UKF 观测器（状态 [U1,U2,SOC]，量测 Ut），P0=diag(1e-7,1e-7,2.45)、Qu、Ru 取原文值，SOC 截断防失锁  
+├── linear_mpc.py                      # 式(13)–(15)：逐点线性化 + 预测域内 LTI 的 MPC；Δu 按 Imax 无量纲化；u/Ts/Ut 三类约束；自带原始有效集法 QP（SLSQP 兜底）  
+├── ddpg_agent.py                      # 式(16)–(29)：DDPG（Actor 20-20 / Critic 100-75 / ReLU / 软更新 τ=1e-3）、经验回放、OU 探索噪声  
+├── charging_environments.py           # 式(21)(22)(30)(31)：单独 DRL（3 维观测，u∈[0,46] A）与 MPC-guided DRL（7 维观测，u^l∈[-6,6] A）两个环境；奖励 λV/λT/λS；状态归一化  
+├── mpc_charging_simulation.py         # 单独 MPC 充电仿真（Fig.3 数据源）：UKF 修正 SOC、真实系统叠加 p=0.001·sin(X)  
+├── train_charging_controllers.py      # 训练入口（Fig.4 / Table III 数据源）：Table I 超参、探索噪声线性衰减、300/500/1000/1500 检查点  
+├── evaluate_charging_performance.py   # Table III 评估：贪心策略 × 50 次随机仿真，统计最大端电压、平均越限率、平均充电时间  
+├── plot_standalone_mpc_figure.py      # Fig.3 绘图：50 次实现的 SOC（估计/真实）与端电压，含 3.6 V 越限放大图  
+├── plot_training_comparison.py        # Fig.4 绘图：(a) 回报 (b) 表面温度 (c) 电压越限 (d) 充电时间；单种子时用滑动窗口极值替代 9 种子包络  
+├── result_paths.py                    # 结果路径约定：logs/<controller>_seed<k>.npz、agents/<controller>/seed<k>/episode_XXXX.pt  
+└── results/                           # 1 个种子 × 1500 episodes 的实测输出  
+    ├── agents/                        # 智能体检查点（actor/critic + 目标网络 + 优化器状态）  
+    │   ├── drl/seed1/episode_{0300,0500,1000,1500}.pt  
+    │   └── mpc_drl/seed1/episode_{0300,0500,1000,1500}.pt  
+    ├── logs/                          # 逐 episode 的回报、步数、最高表面温度、电压裕度、充电时间  
+    │   ├── drl_seed1.npz  
+    │   └── mpc_drl_seed1.npz  
+    ├── figures/                       # fig3_standalone_mpc.png、fig4_training_comparison.png  
+    └── table3_charging_performance.csv # Table III 数值（6 个智能体 × 最大电压 / 越限率 / 充电时间）  
+    
+> 仅复现fig3,4,TABLEⅢ  
+> 论文有未给的参数
 
 # MPC相关自学内容  
 
